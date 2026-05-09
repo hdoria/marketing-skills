@@ -11,6 +11,7 @@ Curado por [Hugo Doria](https://github.com/hdoria) pra apoiar o workshop **Claud
 ## Sumário
 
 - [O que vem com o plugin](#o-que-vem-com-o-plugin)
+- [Estrutura do repositório](#estrutura-do-repositório)
 - [Instalar (via marketplace · recomendado)](#instalar-via-marketplace--recomendado)
 - [Instalação manual (alternativa)](#instalação-manual-alternativa)
 - [Como usar uma skill](#como-usar-uma-skill)
@@ -37,6 +38,34 @@ Curado por [Hugo Doria](https://github.com/hdoria) pra apoiar o workshop **Claud
 | Meta (criar mais skills) | `criar-skill`, `entrevista-skill` |
 
 Cada skill é um arquivo `SKILL.md` com frontmatter YAML (nome, descrição, gatilhos) e o playbook em markdown. A descrição é o que o Claude lê pra decidir quando ativar a skill automaticamente.
+
+---
+
+## Estrutura do repositório
+
+O repo segue o padrão "marketplace com pasta `plugins/`" recomendado pela Anthropic — o que permite hospedar mais de um plugin no mesmo repositório no futuro (ex: `plugins/sales-skills`, `plugins/ops-skills`) sem reorganizar nada.
+
+```text
+marketing-skills/                       ← repo (= marketplace)
+├── .claude-plugin/
+│   └── marketplace.json                ← catálogo de plugins do repo
+├── plugins/
+│   └── marketing-skills/               ← o plugin em si
+│       ├── .claude-plugin/
+│       │   └── plugin.json             ← manifesto do plugin
+│       └── skills/                     ← 21 pastas, uma por skill
+│           ├── afiar-ideia/
+│           │   └── SKILL.md
+│           ├── post-longo-x/
+│           │   └── SKILL.md
+│           └── ...
+├── README.md
+└── LICENSE
+```
+
+O `marketplace.json` usa `metadata.pluginRoot: "./plugins"`, então o `source` de cada plugin pode ser apenas o nome da pasta (`"marketing-skills"`). Isso facilita adicionar novos plugins depois.
+
+Quando você instala via marketplace no Cowork ou Code, o Claude resolve esses caminhos sozinho — você não precisa pensar nessa estrutura, só entender que o plugin "vive" em `plugins/marketing-skills/`.
 
 ---
 
@@ -73,12 +102,12 @@ Depois disso as skills ficam acessíveis com namespace: `/marketing-skills:afiar
 git clone https://github.com/hdoria/marketing-skills ~/.claude/plugins/marketing-skills
 ```
 
-Reinicie o cliente. As skills aparecem em `list_skills`.
+Reinicie o cliente. As skills aparecem em `list_skills` (o Claude resolve o `plugin.json` em `plugins/marketing-skills/.claude-plugin/` automaticamente).
 
-Pra testar uma versão local sem instalar:
+Pra testar uma versão local apontando direto pra pasta do plugin:
 
 ```bash
-claude --plugin-dir /caminho/pro/marketing-skills
+claude --plugin-dir /caminho/pro/marketing-skills/plugins/marketing-skills
 ```
 
 ---
@@ -372,10 +401,12 @@ Se seu texto precisa de uma dessas por motivo legítimo, edite manualmente depoi
 ### Editar uma skill existente
 
 ```bash
-cd ~/.claude/plugins/marketing-skills/skills/<nome-da-skill>
+cd ~/.claude/plugins/marketing-skills/plugins/marketing-skills/skills/<nome-da-skill>
 # editar SKILL.md
 /reload-plugins   # no Claude Code
 ```
+
+> Caminho parece "duplicado" porque o repo é um **marketplace** (primeira pasta `marketing-skills`) que contém o **plugin** com mesmo nome (segunda pasta) — é o padrão oficial da Anthropic e te deixa adicionar outros plugins no mesmo repo depois.
 
 Skills são editáveis sem medo — só quebram se outras skills as chamarem por nome (as desse plugin não chamam).
 
