@@ -1,0 +1,29 @@
+{
+  "name": "marketing-skills",
+  "version": "0.1.0",
+  "description": "21 skills em PT-BR pra workflows de marketing com Claude. Cobre pesquisa de mercado, ideação, escrita por canal (X, LinkedIn, newsletter, artigo, copy, email), construção de páginas (landing, lead magnet, frontend), edição anti-slop, conselho LLM, distribuição multi-canal e meta-skills pra criar/extrair novas skills.",
+  "author": {
+    "name": "Hugo Doria",
+    "email": "hugo@hdoria.me",
+    "url": "https://github.com/hdoria"
+  },
+  "homepage": "https://github.com/hdoria/marketing-skills",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hdoria/marketing-skills.git"
+  },
+  "license": "MIT",
+  "keywords": [
+    "marketing",
+    "content",
+    "portuguese",
+    "pt-br",
+    "anti-slop",
+    "copywriting",
+    "social-media",
+    "seo",
+    "landing-page",
+    "email",
+    "skills"
+  ]
+}
