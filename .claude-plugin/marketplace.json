@@ -1,5 +1,4 @@
 {
-  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
   "name": "marketing-skills",
   "owner": {
     "name": "Hugo Doria",
@@ -7,13 +6,12 @@
   },
   "metadata": {
     "description": "Plugin de marketing em PT-BR com 21 skills pra Claude Cowork e Claude Code. Curado por Hugo Doria pro workshop Claude para Marketing da Vibe Makers.",
-    "version": "0.1.0",
-    "pluginRoot": "./plugins"
+    "version": "0.1.0"
   },
   "plugins": [
     {
       "name": "marketing-skills",
-      "source": "marketing-skills",
+      "source": "./plugins/marketing-skills",
       "description": "21 skills em português pra ciclo completo de marketing: pesquisa, ideação, escrita por canal, páginas, edição anti-slop e distribuição multi-canal.",
       "version": "0.1.0",
       "author": {
@@ -22,10 +20,6 @@
         "url": "https://github.com/hdoria"
       },
       "homepage": "https://github.com/hdoria/marketing-skills",
-      "repository": {
-        "type": "git",
-        "url": "https://github.com/hdoria/marketing-skills.git"
-      },
       "license": "MIT",
       "category": "marketing",
       "tags": [
